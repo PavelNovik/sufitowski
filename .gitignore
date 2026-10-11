@@ -1,0 +1,22 @@
+# dependencies and build output
+/node_modules/
+/.next/
+/out/
+/build/
+/.cache/
+
+# local environment values
+.env
+.env.*
+!.env.example
+
+# logs and local tooling
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+.DS_Store
+Thumbs.db
+
+# TypeScript incremental cache
+*.tsbuildinfo
+next-env.d.ts
