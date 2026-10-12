@@ -251,25 +251,28 @@ export function CalculatorShell() {
               <legend>{t("lightingTitle")}</legend>
               <p className="step-help">{t("selectHelp")}</p>
               <div className="choice-grid">
-                {lightingOptions.map(([id, key]) => (
-                  <label className="quantity-choice" key={id}>
-                    <span className="choice-copy">
-                      <span className="choice-title">{translatePrice(key)}</span>
-                      <span className="choice-subtitle">{priceT("statusUnverified")}</span>
-                    </span>
-                    <span className="quantity-control">
-                      <span>{t("quantity")}</span>
-                      <input
-                        aria-label={`${t("quantity")}: ${translatePrice(key)}`}
-                        min="0"
-                        onChange={(event) => updateLighting(id, Number(event.target.value))}
-                        step="1"
-                        type="number"
-                        value={lighting[id] ?? 0}
-                      />
-                    </span>
-                  </label>
-                ))}
+                {lightingOptions.map(([id, key]) => {
+                  const unitLabel = priceT(id === "led-line" || id === "magnetic-rail" ? "unitLinearMetre" : "unitPiece");
+                  return (
+                    <label className="quantity-choice" key={id}>
+                      <span className="choice-copy">
+                        <span className="choice-title">{translatePrice(key)}</span>
+                        <span className="choice-subtitle">{priceT("statusUnverified")}</span>
+                      </span>
+                      <span className="quantity-control">
+                        <span>{t("quantity")} · {unitLabel}</span>
+                        <input
+                          aria-label={`${t("quantity")}: ${translatePrice(key)} (${unitLabel})`}
+                          min="0"
+                          onChange={(event) => updateLighting(id, Number(event.target.value))}
+                          step="1"
+                          type="number"
+                          value={lighting[id] ?? 0}
+                        />
+                      </span>
+                    </label>
+                  );
+                })}
               </div>
             </fieldset>
           ) : null}
